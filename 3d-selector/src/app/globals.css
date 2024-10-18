@@ -1,0 +1,152 @@
+/* src/app/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color Palette */
+:root {
+  --background: #f4f4f9; /* Light grayish background for a polished look */
+  --foreground: #1e1e24; /* Dark gray for high contrast text */
+  --highlight: #ffb400;  /* Warm, rich yellow-orange for highlights and call to action buttons */
+  --primary: #0057a3;    /* Bold blue for primary buttons */
+  --secondary: #7c8ba1;  /* Muted gray-blue for secondary buttons */
+  --button-text: #ffffff; /* Button text color */
+  --stat-text: #333f48;   /* Dark gray for statistics text */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --highlight: #ffb400;
+    --primary: #0057a3;
+    --secondary: #7c8ba1;
+    --button-text: #ffffff;
+    --stat-text: #cccccc;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* App container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+/* UI container for buttons and statistics */
+.ui-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  height: 20vh;
+}
+
+/* Navigation Buttons */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+}
+
+.navigation button {
+  padding: 12px 24px;
+  border-radius: 12px;
+  background-color: var(--primary);
+  color: var(--button-text);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navigation button:hover {
+  background-color: var(--highlight);
+}
+
+.navigation button:disabled {
+  background-color: var(--secondary);
+  cursor: not-allowed;
+}
+
+/* Statistics Section */
+.statistics {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--stat-text);
+}
+
+.statistics h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--highlight);
+  letter-spacing: 0.04em;
+}
+
+.statistics p {
+  font-size: 1.2rem;
+  color: var(--stat-text);
+  letter-spacing: 0.03em;
+}
+
+/* Responsive Adjustments for Mobile */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+  }
+
+  .ui-container {
+    padding: 10px;
+    height: auto;
+  }
+
+  .navigation {
+    max-width: 300px;
+  }
+
+  .statistics h2 {
+    font-size: 1.4rem;
+  }
+
+  .statistics p {
+    font-size: 1rem;
+  }
+
+  .navigation button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px;
+  }
+
+  .navigation button {
+    margin: 0;
+  }
+}
