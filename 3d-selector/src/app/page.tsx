@@ -7,51 +7,25 @@ import { Environment, ContactShadows } from '@react-three/drei'; // Import Conta
 import Step from './components/3D/Step';
 import Navigation from './components/UI/Navigation';
 import Statistics from './components/UI/Statistics';
-import { ProcessProvider, useProcess } from './context/ProcessContext';
+import { useProcess, ProcessProvider } from './context/ProcessContext'; // Import ProcessContext for step management
 
 const HomePage = () => {
-  const shapes = ['box', 'sphere', 'cylinder']; // Geometric shapes for each step
-  const { currentStep } = useProcess();
+  const { currentStep } = useProcess(); // Use currentStep from context
+
+  const processes = ["etching", "deposition", "baking", "oxidation"]; // Steps
 
   return (
     <div className="app-container">
-      <Canvas
-        shadows
-        camera={{ position: [0, 1, 5], fov: 50 }} // Adjusted camera position and FOV for better view
-        gl={{ antialias: true }} // Enable anti-aliasing for smoother edges
-        style={{ width: '100%', height: '80vh' }}
-      >
-        {/* Global ambient light */}
+      <Canvas shadows camera={{ position: [0, 1, 5], fov: 50 }} gl={{ antialias: true }} style={{ width: '100%', height: '80vh' }}>
         <ambientLight intensity={0.3} />
-
-        {/* Directional light for strong sunlight-like lighting */}
-        <directionalLight
-          position={[5, 10, 5]}
-          intensity={1.5}
-          castShadow
-          shadow-mapSize-width={2048}  // Higher shadow map resolution for better quality shadows
-          shadow-mapSize-height={2048}
-        />
-
-        {/* Render the current step */}
-        <Step shape={shapes[currentStep]} />
-
-        {/* High-quality soft shadows on the ground */}
-        <ContactShadows
-          position={[0, -1, 0]}
-          opacity={0.25}
-          width={10}
-          height={10}
-          blur={1.5}
-          far={10}
-        />
-
-        {/* Environment map for reflections (requires HDRI or texture environment) */}
+        <directionalLight position={[5, 10, 5]} intensity={1.5} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
+        <Step process={processes[currentStep]} />
+        <ContactShadows position={[0, -1, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={10} />
         <Environment preset="sunset" />
       </Canvas>
 
       <div className="ui-container">
-        <Navigation />
+        <Navigation /> {/* No need to pass handleNext/handlePrevious, as Navigation uses context */}
         <Statistics />
       </div>
     </div>
